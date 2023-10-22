@@ -18,9 +18,12 @@ function generatePassword() {
   console.log("Password generation happens here");
   
   // The amount of characters to generate
-  var passwordLength = 8;
+  var passwordLength = 0;
 
-  // Prompt user for password length
+  // Prompt user for password length, while ensuring it is within the acceptable range
+  while (passwordLength < 8 || passwordLength > 128) {
+    passwordLength = prompt("Enter password length (8-128)");
+  }
 
   // The four sets of characters that can be selected
   var lowercaseChars = "abcdefghijklmnopqrstuvwxyz"
@@ -32,17 +35,25 @@ function generatePassword() {
 
   // Prompt user for usable characters
 
-  // Split usableChars into a list of characters
+  // Split usableChars into a list of individual characters
+  var usableCharArray = usableChars.split("");
 
   // The generated password, to be returned when the function ends
-  var password;
+  var password = "";
 
   // Generate password of specified length
-  for (i = 0; i < passwordLength; i++) {
+  for (i = 1; i <= passwordLength; i++) {
     // Pull a random character from usableChars
+    var randChar = usableCharArray[getRandomIntInclusive(0, usableCharArray.length - 1)]
     // Append to password
+    password = password + randChar;
   }
 
-  password = "Bananarama";
   return password;
+}
+
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
 }
