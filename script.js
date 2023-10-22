@@ -21,8 +21,10 @@ function generatePassword() {
   var passwordLength = 0;
 
   // Prompt user for password length, while ensuring it is within the acceptable range
+  passwordLength = prompt("Enter password length (8-128)");
+
   while (passwordLength < 8 || passwordLength > 128) {
-    passwordLength = prompt("Enter password length (8-128)");
+    passwordLength = prompt("Invalid length given. Enter password length (8-128)");
   }
 
   // The four sets of characters that can be selected
@@ -34,6 +36,25 @@ function generatePassword() {
   var usableChars = "";
 
   // Prompt user for usable characters
+  var useLowerCaseChars = prompt("Use lowercase characters? (Y/N)");
+  if (useLowerCaseChars === "Y") {
+    usableChars = usableChars.concat("", lowercaseChars);
+  }
+
+  var useUpperCaseChars = prompt("Use uppercase characters? (Y/N)");
+  if (useUpperCaseChars === "Y") {
+    usableChars = usableChars.concat("", uppercaseChars);
+  }
+
+  var useNumericChars = prompt("Use numeric characters? (Y/N)");
+  if (useNumericChars === "Y") {
+    usableChars = usableChars.concat("", numericChars);
+  }
+
+  var useSpecialChars = prompt("Use special characters? (Y/N)");
+  if (useSpecialChars === "Y") {
+    usableChars = usableChars.concat("", specialChars);
+  }
 
   // Split usableChars into a list of individual characters
   var usableCharArray = usableChars.split("");
